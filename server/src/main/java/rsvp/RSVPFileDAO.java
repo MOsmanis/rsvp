@@ -1,4 +1,4 @@
-package wedding;
+package rsvp;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class WeddingFileDAO {
+public class RSVPFileDAO {
 
     private static final String BACKUP_PATH = "/opt/backups/";
     private final String messagesFilePath;
 
-    public WeddingFileDAO(@Value("${dao.file}") String filePath) throws IOException
+    public RSVPFileDAO(@Value("${dao.file}") String filePath) throws IOException
     {
         Assert.notNull(filePath,"Property 'dao.file' is not set");
         this.messagesFilePath = filePath;
@@ -34,19 +34,17 @@ public class WeddingFileDAO {
         try {
             FileOutputStream fos = new FileOutputStream(messsagesFile);
             oos = new ObjectOutputStream(fos);
-            List<GuestFamilyDTO> families = Arrays.asList(
+            List<GuestFamilyDTO> families = new ArrayList<>(Arrays.asList(
                 new GuestFamilyDTO("123","Guests", List.of(
-                    new GuestDTO("name1", "surname1", "",false),
-                    new GuestDTO("name2", "surname2","",false)),
-                    false,
-                    null),
+                    new GuestDTO("name1", "surname1", "",false, ""),
+                    new GuestDTO("name2", "surname1","",false, "")),
+                    ""),
                 new GuestFamilyDTO("356","Guests 2", List.of(
-                    new GuestDTO("name2.1", "surname2.1", "",false),
-                    new GuestDTO("name2.2", "surname2.2", "",false),
-                    new GuestDTO("name2.3", "surname2.3", "",false)),
-                    false,
-                    null)
-            );
+                    new GuestDTO("name2.1", "surname2", "",false, ""),
+                    new GuestDTO("name2.2", "surname2", "",false, ""),
+                    new GuestDTO("name2.3", "surname2", "",false, "")),
+                    "")
+            ));
             oos.writeObject(families);
             oos.close();
         } finally {

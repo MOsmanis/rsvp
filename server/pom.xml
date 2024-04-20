@@ -8,9 +8,9 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<artifactId>firealarm</artifactId>
+	<artifactId>rsvp</artifactId>
 	<version>1</version>
-	<name>fire-alarm</name>
+	<name>rsvp</name>
 	<description></description>
 	<properties>
 		<java.version>21</java.version>

@@ -1,4 +1,4 @@
-package wedding;
+package rsvp;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class WeddingConfig implements WebMvcConfigurer {
+public class RSVPConfig implements WebMvcConfigurer {
     @Value("${cross.origin.host}")
     private String crossOriginHost;
 

@@ -5,18 +5,12 @@
   padding: 10px;
 } 
 
-#root a {
-  font-size: 13px;
-} 
-
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,6 +28,15 @@ a:hover {
 }
 
 body {
+  /* background-image: url(background.png);
+  background-image: url(background.jpeg); */
+  background-size: 100%;
+  font-family: Baskerville ,'Zapfino' !important;
+  color: rgba(212, 175, 55) !important;
+  line-height: 2.5 !important;
+  /* background-color: #ffffee !important; */
+  background-color: #0a2c1c !important;
+  /* ziediem bēša krāsu */
   margin: 0;
   display: flex;
   place-items: center;
@@ -41,44 +44,103 @@ body {
   min-height: 100vh;
 }
 
+#gold-text {
+  text-transform: uppercase;
+  /* color: rgba(212, 175, 55) !important; */
+  background-image: linear-gradient(
+    to right,
+    #462523 0,
+           #cb9b51 22%, 
+    #f6e27a 45%,
+    #f6f2c0 50%,
+    #f6e27a 55%,
+    #cb9b51 78%,
+    #3c4623 100%
+    );
+     color:transparent;
+     -webkit-background-clip:text;
+  /* color:#c3a343; darker gold */
+  /* -webkit-text-fill-color: transparent;
+  background: -webkit-linear-gradient(transparent, transparent),
+  url(gold.jpeg) repeat;
+  -webkit-background-clip: text; */
+}
+
+.form-text {
+  color: rgba(212, 175, 55) !important;
+}
+
 h1 {
   font-size: 40px;
   margin-bottom: 2rem !important;
 }
 
-#board {
+#invite {
   font-size: 15px;
   width: auto;
 }
 
-#board button {
-  margin-top: 1rem;
+#invite textarea{
+  color: rgb(91, 90, 89) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffee !important;
+  border-color: black;
+  box-shadow: none;
 }
 
-#board .form-control {
+#invite button {
+  margin-top: 1rem;
+
+  background-color: rgba(212, 175, 55);
+}
+
+#invite .col button {
+  margin-top: 0rem;
+  /* font-size:30px; */
+  /* padding: 0; */
+  /* width: 25px;
+  height: 25px; */
+  background-color: rgba(212, 175, 55);
+}
+
+#invite .form-control {
+  color: rgb(91, 90, 89) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffee !important;
+  border-color: black;
+  box-shadow: none;
+  height: 28px;
+  /* line-height: 10px;
   font-size: 20px;
-  text-align: center;
+  text-align: center; */
 }
 
-#board .form-label {
+#invite .form-label {
   margin-top: 1rem;
 }
 
-#board .alert {
+#invite .alert {
   margin-top: 1rem;
   margin-bottom: 0rem;
 }
 
-.alert-warning {
-  font-size: 14px;
-}
-
-#board ::placeholder {
+#invite ::placeholder {
   opacity: 0.3;
 }
 
+
+#invite .form-check-input {
+  width: 25px;
+  height: 25px;
+}
+
+#invite  .form-check-input:checked {
+  background-color: green;
+  border-color: rgb(0,0,0,0);
+}
+
 @media (min-width: 600px){
-  #board {
+  #invite {
     width: 30rem;
   }
   #root {

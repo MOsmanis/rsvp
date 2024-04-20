@@ -5,7 +5,7 @@ FROM openjdk:21-oracle
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY target/firealarm-1.jar app.jar
+COPY target/rsvp-1.jar app.jar
 
 # Expose the port that your application listens on
 EXPOSE 8080 8080

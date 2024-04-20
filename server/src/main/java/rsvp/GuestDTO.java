@@ -1,7 +1,8 @@
-package wedding;
+package rsvp;
 
 import java.io.Serializable;
 
-public record GuestDTO(String name, String familyName, String dietaryPreference, boolean isComing)
+public record GuestDTO(String name, String familyName, String dietaryPreference, boolean isComing,
+                       String latestUpdate)
     implements Serializable {
 }
