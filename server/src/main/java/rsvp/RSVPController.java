@@ -1,4 +1,4 @@
-package firealarm;
+package wedding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,45 +10,42 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-public class FireAlarmController {
-    private final AlarmMessageFileDao alarmMessageFileDao;
+public class WeddingController {
+    private final WeddingFileDAO weddingFileDAO;
 
-    @Value("${alarm.message.timezone}")
+    @Value("${wedding.timezone}")
     private String timezone;
 
     @Autowired
-    public FireAlarmController(AlarmMessageFileDao alarmMessageFileDao)
+    public WeddingController(WeddingFileDAO weddingFileDAO)
     {
-        this.alarmMessageFileDao = alarmMessageFileDao;
+        this.weddingFileDAO = weddingFileDAO;
     }
 
-    @GetMapping("/messages")
+    @GetMapping("/guests")
     @ResponseStatus(HttpStatus.OK)
-    public List<AlarmMessageDTO> getAlarmMessages() throws IOException, ClassNotFoundException
+    public List<GuestDTO> getAllGuests() throws IOException, ClassNotFoundException
     {
-        return alarmMessageFileDao.getAllMessages();
+        return weddingFileDAO.getAllFamilies().stream().flatMap(f -> f.members().stream()).collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/submit", method = POST, consumes = APPLICATION_JSON_VALUE, produces =
         APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void postAlarmMessage(@RequestBody AlarmMessageDTO request) throws ClassNotFoundException, IOException
+    public void postAlarmMessage(@RequestBody GuestFamilyDTO request) throws ClassNotFoundException, IOException
     {
-        //TODO filter out profanity
         String sentAt = ZonedDateTime.now(ZoneId.of(this.timezone))
             .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-        String id = UUID.randomUUID().toString();
-        AlarmMessageDTO newAlarmMessage = new AlarmMessageDTO(id, request.isFireDepartmentCalled(),
-            request.apartment(), request.comment(), sentAt);
-
-        alarmMessageFileDao.save(newAlarmMessage);
-        //TODO call whatsapp service
+        GuestFamilyDTO updatedFamily = new GuestFamilyDTO(request.id(), request.welcomeMsg(), request.members(),
+            request.responded(), sentAt);
+        weddingFileDAO.save(updatedFamily);
+        //TODO call email service
     }
 
     @ExceptionHandler({IOException.class, ClassNotFoundException.class})
