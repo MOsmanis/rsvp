@@ -1,4 +1,4 @@
-# Fire Alarm
+# RSVP
 
 Simple wedding invite/planning web tool
 
