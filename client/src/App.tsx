@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import { useParams } from 'react-router-dom'
 import {Guest} from './Guests'
+import envelope from './envelope.svg'
 
 
 export interface Family {
@@ -96,7 +97,7 @@ function App() {
         </Col>
       </Row>
       <Row >
-          <Form onSubmit={e => onSubmitAttendance(e)}>
+          <Form id="guests" onSubmit={e => onSubmitAttendance(e)}>
             <Row>
               <Col>
                 Guest
@@ -142,7 +143,7 @@ function App() {
             {family.lastResponseDate.trim() === "" ? "Response has not been received yet" : "Last response received on " + family.lastResponseDate }
             </Form.Text>
           </Row>
-          <Button variant="primary" type="submit">
+          <Button type="submit">
               <Spinner 
               hidden={!loading}
               as="span"
@@ -151,7 +152,7 @@ function App() {
               role="status"
               aria-hidden="true"
             />
-            <div hidden={loading}>Submit</div>
+            <div hidden={loading}><img src={envelope}/></div>
           </Button>
         </Form>
         </Row>
